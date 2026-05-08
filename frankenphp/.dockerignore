@@ -1,0 +1,16 @@
+README.md
+.env
+.env.example
+.git
+.gitignore
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.env.*.php
+storage/logs/*
+node_modules/
+vendor/
+

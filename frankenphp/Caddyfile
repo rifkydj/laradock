@@ -1,0 +1,49 @@
+# FrankenPHP Caddyfile Configuration (Worker Mode Enabled)
+# Project: i4t-platform
+{
+    frankenphp {
+        # Worker mode: pre-loads the app once and reuses it across requests
+        # Points to a dedicated bootstrap script — NOT index.php directly
+        worker {
+            file /var/frankenphp-worker.php
+            num 4
+        }
+    }
+}
+
+:80 {
+    # Set document root to i4t-platform
+    root * /var/www/i4t-platform/public
+
+    # php_server handles PHP execution AND static file serving
+    php_server
+}
+
+
+# Example: If you need to route to a specific Laravel/Symfony public folder
+# Uncomment and adjust as needed:
+# :80 {
+#     root * /var/www/public
+#     php_fastcgi localhost:9000
+#     encode gzip
+#     file_server
+#
+#     # Laravel-specific rewrite rules
+#     try_files {path} {path}/ /index.php?{query}
+# }
+
+# Example: Multiple sites configuration
+# example.local {
+#     root * /var/www/example/public
+#     php_fastcgi localhost:9000
+#     encode gzip
+#     file_server
+# }
+#
+# example2.local {
+#     root * /var/www/example2/public
+#     php_fastcgi localhost:9000
+#     encode gzip
+#     file_server
+# }
+

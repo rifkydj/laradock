@@ -1,0 +1,144 @@
+✅ FRANKENPHP SETUP COMPLETE!
+
+═══════════════════════════════════════════════════════════════════════
+
+📋 WHAT WAS SETUP:
+
+Your Laradock environment now has FrankenPHP running on port 8085
+alongside your existing Nginx on port 8083. Both services are
+completely independent and will NOT affect each other.
+
+═══════════════════════════════════════════════════════════════════════
+
+🚀 QUICK START:
+
+1. Build FrankenPHP image:
+   $ cd /home/mohamed-rifky/projects/laradock-2
+   $ docker-compose build frankenphp
+
+2. Start FrankenPHP alongside Nginx:
+   $ docker-compose up -d frankenphp nginx
+
+3. Access your applications:
+   • Nginx:     http://localhost:8083
+   • FrankenPHP: http://localhost:8085
+
+4. View logs:
+   $ docker-compose logs -f frankenphp
+
+═══════════════════════════════════════════════════════════════════════
+
+📁 FILES CREATED:
+
+/frankenphp/
+├── Dockerfile          Build configuration for FrankenPHP container
+├── Caddyfile          Web server configuration (Caddy)
+├── README.md          Detailed documentation
+└── .dockerignore      Optimization for Docker builds
+
+Root:
+└── FRANKENPHP_SETUP.md       Complete setup guide
+
+═══════════════════════════════════════════════════════════════════════
+
+⚙️  CONFIGURATION:
+
+Environment Variables (from .env):
+  • FRANKENPHP_HOST_HTTP_PORT=8085     HTTP port on host
+  • FRANKENPHP_HOST_HTTPS_PORT=8445    HTTPS port on host
+  • FRANKENPHP_VERSION=php8.3           PHP version
+
+Your Application:
+  • Mounted at:  /var/www (same as nginx)
+  • Source:      ../  (from APP_CODE_PATH_HOST)
+  • Container:   /var/www (APP_CODE_PATH_CONTAINER)
+
+═══════════════════════════════════════════════════════════════════════
+
+🔧 KEY DIFFERENCES:
+
+Nginx (Port 8083):
+  - Web server: Nginx
+  - PHP: PHP-FPM (separate container)
+  - Configuration: nginx/sites/
+
+FrankenPHP (Port 8085):
+  - Web server: Caddy (built-in)
+  - PHP: Direct (no PHP-FPM needed)
+  - Configuration: frankenphp/Caddyfile
+
+═══════════════════════════════════════════════════════════════════════
+
+🔗 NETWORKING:
+
+Both services can connect to:
+  • MySQL:     mysql:3306
+  • PostgreSQL: postgres:5432
+  • Redis:     redis:6379
+  • All other Laradock services
+
+═══════════════════════════════════════════════════════════════════════
+
+📝 COMMON COMMANDS:
+
+# Start only FrankenPHP
+$ docker-compose up -d frankenphp
+
+# Start everything
+$ docker-compose up -d
+
+# Execute commands in FrankenPHP
+$ docker-compose exec frankenphp php -v
+$ docker-compose exec frankenphp composer install
+$ docker-compose exec frankenphp php artisan migrate
+
+# Stop only FrankenPHP
+$ docker-compose stop frankenphp
+
+# Restart FrankenPHP
+$ docker-compose restart frankenphp
+
+# Rebuild after changes
+$ docker-compose build --no-cache frankenphp
+
+# View live logs
+$ docker-compose logs -f frankenphp
+
+═══════════════════════════════════════════════════════════════════════
+
+✨ IMPORTANT NOTES:
+
+✓ Nginx remains untouched on port 8083
+✓ FrankenPHP runs independently on port 8085
+✓ Can run both simultaneously
+✓ Share same codebase, networks, and services
+✓ Easy to switch focus between them
+✓ No port conflicts
+
+═══════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+For more details, see:
+  • frankenphp/README.md           - FrankenPHP guide
+  • FRANKENPHP_SETUP.md            - Setup guide
+  • frankenphp/Caddyfile           - Web server config
+
+Official Documentation:
+  • https://frankenphp.dev/        - FrankenPHP docs
+  • https://caddyserver.com/       - Caddy docs
+  • https://laradock.io/           - Laradock docs
+
+═══════════════════════════════════════════════════════════════════════
+
+🎯 NEXT STEPS:
+
+1. Review frankenphp/Caddyfile and adjust if needed
+2. Build: docker-compose build frankenphp
+3. Start: docker-compose up -d frankenphp
+4. Test: curl http://localhost:8085
+
+═══════════════════════════════════════════════════════════════════════
+
+Happy coding! 🚀
+
